@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DotProprty API</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  load_data();
+  function load_data(query)
+  {
+   $.ajax({
+    url:"/livesearch",
+    method:"POST",
+    data:{query:query},
+    success:function(data)
+    {
+      $('#result').html(data);
+      $("#result").append(data.htmlresponse);
+    }
+   });
+  }
+  $('#search_text').keyup(function(){
+    var search = $(this).val();
+    if(search != ''){
+    load_data(search);
+   }else{
+    load_data();
+   }
+  });
+});
+</script>
+</head>
+<body>
+<div class="container search-table">
+<p><h2 align="center">Dot Property Data finder</h2></p>
+            <div class="search-box">
+                <div class="row">
+                    <div class="col-md-3">
+                        <h5>Search :</h5>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="search_text" id="search_text" class="form-control" placeholder="พื้นที่,ชื่อคอนโด">
+                    </div> 
+                </div>
+            </div>
+   <div id="result"></div>
+</div>
+<img src="https://media.giphy.com/media/xT5LMAOzL1jL4p4o4k/giphy.gif" alt="A funny cat gif" >
+<style>
+
+.search-table{
+    padding: 10%;
+    margin-top: -6%;
+}
+.search-box{
+    background: #5665a4;
+    border: 1px solid #f36d00;
+    padding: 3%;
+
+}
+.search-box input:focus{
+    box-shadow:none;
+    border:2px solid #eeeeee;
+    
+}
+.search-list{
+    background: rgb(0, 0, 0);
+    border: 1px solid #0026ff;
+    border-top: none;
+}
+.search-list h3{
+    background: #eee;
+    padding: 3%;color:#fe6f41;
+    margin-bottom: 0%;
+}
+body{ background-image: url(https://images8.alphacoders.com/503/thumb-1920-503792.jpg);
+background-repeat: no-repeat;
+background-attachment: fixed;
+background-size: cover;
+background-size: 100% 100%; }
+
+td {
+    background-color: #a4a0a0;
+}
+
+tr {
+    background-color: #6f6c6c;
+}
+
+img {
+        display: block;
+        margin: auto;
+        width: 50%;
+}
+</style>
+</body>
+</html>
